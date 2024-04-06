@@ -1,4 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api');
+const http = require('http');
+
 const token = '6319635612:AAEiYjpMty-VqmKgkhAK9nRQRkhcPFwvdJo'; // Remplacez VOTRE_TOKEN par votre token API Telegram
 const bot = new TelegramBot(token, { polling: true });
 
@@ -78,3 +80,16 @@ bot.on('callback_query', (query) => {
 
 // Démarre l'envoi des prédictions toutes les minutes
 setInterval(sendPredictions, 60000);
+
+
+// Créez un serveur HTTP simple qui renvoie "I'm alive" lorsque vous accédez à son URL
+const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.write("I'm alive");
+    res.end();
+});
+
+// Écoutez le port 8080
+server.listen(8080, () => {
+    console.log("Keep alive server is running on port 8080");
+});
